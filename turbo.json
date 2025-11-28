@@ -1,6 +1,11 @@
 {
   "$schema": "https://turborepo.com/schema.json",
   "tasks": {
+    "build:packages": {
+      "outputs": ["dist/**"],
+      "dependsOn": ["^build"],
+      "cache": false
+    },
     "build": {
       "outputs": ["dist/**"]
     },

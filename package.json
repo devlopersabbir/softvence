@@ -7,6 +7,7 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
+    "bp": "turbo run build:packages",
     "publish-packages": "turbo run build && changeset version && changeset publish"
   },
   "devDependencies": {
