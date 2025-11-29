@@ -3,9 +3,8 @@ import { S3Service } from '@softvence/s3';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly service: S3Service) {}
+  constructor(private readonly s3Service: S3Service) {}
   getHello(): string {
-    // const res = this.service.uploadFiles();
     return 'Hello World!';
   }
 }
