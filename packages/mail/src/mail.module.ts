@@ -65,15 +65,14 @@ export class MailModule {
       global: true,
       module: MailModule,
       imports: options.imports || [],
-      providers: [
-        this.createAsyncProviders(options),
-        MailService,
-      ],
+      providers: [this.createAsyncProviders(options), MailService],
       exports: [MailService],
     };
   }
 
-  private static createAsyncProviders(options: MailModuleAsyncOptions): Provider {
+  private static createAsyncProviders(
+    options: MailModuleAsyncOptions,
+  ): Provider {
     return {
       provide: MAIL_MODULE_OPTIONS,
       useFactory: options.useFactory,

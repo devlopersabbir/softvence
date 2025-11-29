@@ -1,6 +1,6 @@
 {
   "name": "@softvence/mail",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Mail service for softvence",
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
   },
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "lint": "eslint \"src/**/*.ts\" --fix",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",

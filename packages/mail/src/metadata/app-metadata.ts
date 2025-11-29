@@ -7,7 +7,7 @@ class AppMetadata {
   constructor() {
     const packageJsonPath = path.join(process.cwd(), "package.json");
     const packageJsonContent = fs.readFileSync(packageJsonPath, "utf8");
-    this.metadata = JSON.parse(packageJsonContent);
+    this.metadata = JSON.parse(packageJsonContent) as Record<string, string>;
   }
 
   get name(): string {
