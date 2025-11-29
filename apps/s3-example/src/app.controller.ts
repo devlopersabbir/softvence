@@ -2,9 +2,10 @@ import {
   Controller,
   Post,
   UploadedFile,
+  UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { S3Service } from '@softvence/s3';
 
 @Controller()
@@ -23,11 +24,10 @@ export class AppController {
     };
   }
 
-  @Post("multiple")
-  @UseInterceptors(FilesInterceptor("files", 10))
+  @Post('multiple')
+  @UseInterceptors(FilesInterceptor('files', 10))
   async uploadMultiple(@UploadedFiles() files: Express.Multer.File[]) {
     const results = await this.s3Service.uploadFiles(files);
     return results;
   }
-
 }
