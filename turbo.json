@@ -1,12 +1,37 @@
 {
   "$schema": "https://turborepo.com/schema.json",
   "tasks": {
+    "lint": {
+      "inputs": [
+        "packages/**/*.ts",
+        "packages/**/*.tsx",
+        "apps/**/*.ts",
+        "apps/**/*.tsx"
+      ]
+    },
+
+    "test": {
+      "inputs": [
+        "packages/**/*.ts",
+        "packages/**/*.tsx",
+        "apps/**/*.ts",
+        "apps/**/*.tsx"
+      ],
+      "dependsOn": ["lint"]
+    },
+    "clean": {
+      "dependsOn": ["^clean"]
+    },
+    "transit": {
+      "dependsOn": ["^transit"]
+    },
     "build:packages": {
       "outputs": ["dist/**"],
       "dependsOn": ["^build"],
       "cache": false
     },
     "build": {
+      "dependsOn": ["lint", "test"],
       "outputs": ["dist/**"]
     },
     "dev": {

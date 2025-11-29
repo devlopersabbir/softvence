@@ -6,10 +6,10 @@ import { S3Module } from '@softvence/s3';
 @Module({
   imports: [
     S3Module.forRoot({
-      region: 'us-east-1',
-      bucket: 'softvence-s3-example',
-      accessKeyId: 'AWS_ACCESS_KEY_ID',
-      secretAccessKey: 'AWS_SECRET_ACCESS_KEY',
+      region: 'region',
+      bucket: 'bucket',
+      accessKeyId: 'accessKeyId',
+      secretAccessKey: 'secretAccessKey',
       cache: {
         isCache: false,
       },

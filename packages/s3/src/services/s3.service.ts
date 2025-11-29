@@ -53,13 +53,13 @@ export class S3Service {
     return results;
   }
 
-  async uploadFile<T = any>(
+  async uploadFile(
     file: Express.Multer.File,
     metadata: Metadata = {
       ...defaultMetadata,
       ...(this.options.defaultMetadata || {}),
     },
-  ): Promise<S3Response | T> {
+  ): Promise<S3Response> {
     const meta = {
       ...defaultMetadata,
       ...(this.options.defaultMetadata || {}),
@@ -120,8 +120,12 @@ export class S3Service {
 
       return response;
     } catch (err) {
-      return err as T;
-      // throw new BadRequestException(err.message);
+      if (err instanceof Error) {
+        throw new BadRequestException(err.message);
+      }
+      throw new BadRequestException(
+        "Unknown error occurred while uploading file.",
+      );
     }
   }
 

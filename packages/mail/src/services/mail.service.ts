@@ -1,4 +1,3 @@
-
 import {
   BadGatewayException,
   Inject,
@@ -69,7 +68,10 @@ export class MailService {
     }
 
     const mailOptions: nodemailer.SendMailOptions = {
-      from: from || this.moduleOptions.from || `"${this.moduleOptions.displayName || 'No Reply'}" <no-reply@example.com>`,
+      from:
+        from ||
+        this.moduleOptions.from ||
+        `"${this.moduleOptions.displayName || "No Reply"}" <no-reply@example.com>`,
       to,
       subject,
       html: finalHtml,
@@ -86,8 +88,10 @@ export class MailService {
       await this.transporter.sendMail(mailOptions);
       this.logger.log(`📨 Email sent → ${JSON.stringify(to)} : ${subject}`);
     } catch (error) {
-      this.logger.error(`❌ Failed to send email`, error.stack);
-      throw new BadGatewayException(`Failed to send email: ${error.message}`);
+      this.logger.error(`❌ Failed to send email`, (error as Error).stack);
+      throw new BadGatewayException(
+        `Failed to send email: ${(error as Error).message}`,
+      );
     }
   }
 
@@ -97,7 +101,35 @@ export class MailService {
   private renderTemplate(type: MailTemplateType, context: MailContext): string {
     switch (type) {
       case "otp":
-        return generateOtpEmail(context.otp!, context.expire!);
+        return generateOtpEmail(
+          context.otp as string,
+          context.expire as
+            | "10s"
+            | "30s"
+            | "1m"
+            | "2m"
+            | "3m"
+            | "4m"
+            | "5m"
+            | "10m"
+            | "15m"
+            | "30m"
+            | "1h"
+            | "2h"
+            | "6h"
+            | "12h"
+            | "1d"
+            | "3d"
+            | "7d"
+            | "14d"
+            | "30d"
+            | "1w"
+            | "2w"
+            | "4w"
+            | "1mo"
+            | "3mo"
+            | "6mo",
+        );
       default:
         throw new Error(`Unknown email template type: ${type}`);
     }

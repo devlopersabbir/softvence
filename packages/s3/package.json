@@ -1,6 +1,6 @@
 {
   "name": "@softvence/s3",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "S3 bucket file uploader for softvence",
   "repository": {
     "type": "git",
@@ -37,6 +37,8 @@
   },
   "scripts": {
     "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint \"src/**/*.ts\" --fix",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
